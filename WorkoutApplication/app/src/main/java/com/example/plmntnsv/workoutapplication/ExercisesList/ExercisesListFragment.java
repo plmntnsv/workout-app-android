@@ -37,12 +37,6 @@ public class ExercisesListFragment extends Fragment implements ExercisesListCont
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_exercises_list, container, false);
 
-//        mExercises = new Exercise[]{
-//                new Exercise("Push ups"),
-//                new Exercise("Pull ups"),
-//                new Exercise("Dumbbell press")
-//        };
-
         mExercisesAdapter = new ArrayAdapter<Exercise>(getContext(), android.R.layout.simple_list_item_1) {
             @NonNull
             @Override
