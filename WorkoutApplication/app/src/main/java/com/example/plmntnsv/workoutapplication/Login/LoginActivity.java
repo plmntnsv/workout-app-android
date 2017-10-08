@@ -1,22 +1,21 @@
-package com.example.plmntnsv.workoutapplication.Startup;
+package com.example.plmntnsv.workoutapplication.Login;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.plmntnsv.workoutapplication.ExercisesList.ExercisesListFragment;
 import com.example.plmntnsv.workoutapplication.R;
 
-public class StartUpActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Fragment mView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_up);
+        setContentView(R.layout.activity_login);
 
-        mView = StartUpFragment.newInstance();
+        mView = LoginFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_content, mView)

@@ -24,7 +24,6 @@ public class ExercisesListFragment extends Fragment implements ExercisesListCont
 
     private ListView mListViewWorkouts;
     private ArrayAdapter<Exercise> mExercisesAdapter;
-    private Exercise[] mExercises;
     private ExercisesListContracts.Presenter mPresenter;
 
     public ExercisesListFragment() {
@@ -62,12 +61,6 @@ public class ExercisesListFragment extends Fragment implements ExercisesListCont
         return root;
     }
 
-    public void setExercises(Exercise[] exercises) {
-        mExercisesAdapter.clear();
-        mExercisesAdapter.addAll(exercises);
-
-    }
-
     public static ExercisesListFragment newInstance() {
         ExercisesListFragment fragment = new ExercisesListFragment();
         return fragment;
@@ -94,5 +87,10 @@ public class ExercisesListFragment extends Fragment implements ExercisesListCont
     @Override
     public void setPresenter(ExercisesListContracts.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    public void setExercises(Exercise[] exercises) {
+        mExercisesAdapter.clear();
+        mExercisesAdapter.addAll(exercises);
     }
 }

@@ -19,6 +19,7 @@ public class ExercisesListActivity extends AppCompatActivity {
 
         mView = ExercisesListFragment.newInstance();
         mView.setPresenter(mPresenter);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_content, mView)

@@ -1,4 +1,4 @@
-package com.example.plmntnsv.workoutapplication.Startup;
+package com.example.plmntnsv.workoutapplication.Login;
 
 
 import android.content.Intent;
@@ -17,9 +17,9 @@ import com.example.plmntnsv.workoutapplication.Registration.RegistrationActivity
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StartUpFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment implements View.OnClickListener {
 
-    public StartUpFragment() {
+    public LoginFragment() {
         // Required empty public constructor
     }
 
@@ -27,7 +27,7 @@ public class StartUpFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_start_up, container, false);
+        final View root = inflater.inflate(R.layout.fragment_login, container, false);
 
         Button logInBtn = root.findViewById(R.id.button_login);
 
@@ -52,7 +52,7 @@ public class StartUpFragment extends Fragment implements View.OnClickListener {
     }
 
     public static Fragment newInstance() {
-        StartUpFragment fragment = new StartUpFragment();
+        LoginFragment fragment = new LoginFragment();
         return fragment;
     }
 
