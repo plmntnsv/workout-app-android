@@ -10,25 +10,31 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/et_registerEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter email" />
 
         <EditText
+            android:id="@+id/et_registerPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter password" />
 
         <EditText
+            android:id="@+id/et_registerRepeatPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Repeat password" />
 
         <Button
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register" />
+
         <Button
+            android:id="@+id/btn_cancelRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel" />
