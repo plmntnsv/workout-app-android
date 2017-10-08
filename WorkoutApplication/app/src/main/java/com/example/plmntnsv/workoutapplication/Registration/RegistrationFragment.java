@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.plmntnsv.workoutapplication.Home.HomeActivity;
 import com.example.plmntnsv.workoutapplication.R;
+import com.example.plmntnsv.workoutapplication.utils.RegistrationCheck;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,7 +35,7 @@ public class RegistrationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-       final View root = inflater.inflate(R.layout.fragment_registration, container, false);
+        final View root = inflater.inflate(R.layout.fragment_registration, container, false);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -53,39 +53,22 @@ public class RegistrationFragment extends Fragment {
                 String password = registerPassword.getText().toString().trim();
                 String repeatPassword = registerPasswordRepeat.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(root.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(root.getContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (password.length() < 6) {
-                    Toast.makeText(root.getContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (!(password.equals(repeatPassword))){
-                    Toast.makeText(root.getContext(),"Passwords don't match", Toast.LENGTH_SHORT).show();
-                }
-
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(root.getContext(), "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                                if (!task.isSuccessful()) {
-                                    Toast.makeText(root.getContext(), "Authentication failed." + task.getException(),
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Intent intent = new Intent(root.getContext(), HomeActivity.class);
-                                    startActivity(intent);
+                if (RegistrationCheck.checkRegistrationForm(root, email, password, repeatPassword)) {
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    Toast.makeText(root.getContext(), "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(root.getContext(), "Authentication failed." + task.getException(),
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Intent intent = new Intent(root.getContext(), HomeActivity.class);
+                                        startActivity(intent);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
 
