@@ -1,5 +1,8 @@
 package com.example.plmntnsv.workoutapplication.utils;
 
+import android.view.View;
+
+import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.utils.contracts.ModalWindowLogic;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
@@ -10,17 +13,20 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 public class ModalWindow implements ModalWindowLogic {
     private NiftyDialogBuilder dialogBuilder;
 
+    public ModalWindow(View view){
+        dialogBuilder = NiftyDialogBuilder.getInstance(view.getContext());
+        this.setup(view);
+    }
+
     @Override
-    public void setup() {
+    public void setup(View view) {
         dialogBuilder
                 .withTitle("Loading...")
-                .withTitleColor("#FFFFFF")
-                .withDividerColor("#11000000")
-                .withMessage("This is a modal Dialog.")
-                .withMessageColor("#FFFFFFFF")
-                .withDialogColor("#FFE74C3C")
-                .isCancelableOnTouchOutside(false)  ;
-                //.setCustomView(R.layout.custom_view,v.getContext());
+                .withTitleColor(R.color.modalMessageColor)
+                .withDividerColor(R.color.modalMessageColor)
+                .withDialogColor("#FF5DADE2")
+                .isCancelableOnTouchOutside(false)
+                .setCustomView(R.layout.modal_loading, view.getContext());
     }
 
     @Override
