@@ -1,17 +1,15 @@
 package com.example.plmntnsv.workoutapplication.Registration;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseRepository;
+import com.example.plmntnsv.workoutapplication.repositoriy.base.BaseRepositoryContracts;
 
 /**
  * Created by Plmn Tnsv on 08-Oct-17.
  */
 
-public class RegistrationPresenter implements RegistrationContracts.Presenter, RegistrationContracts.OnLoginFinishedListener {
-
+public class RegistrationPresenter implements RegistrationContracts.Presenter, BaseRepositoryContracts.OnLoginFinishedListener {
     private RegistrationContracts.View mView;
-    private FirebaseAuth mAuth;
     private RegistrationFragment mContext;
-    private RegistrationPresenterImpl regImpl;
 
     public RegistrationPresenter(RegistrationFragment context){
         mContext = context;
@@ -49,13 +47,15 @@ public class RegistrationPresenter implements RegistrationContracts.Presenter, R
             return;
         }
 
-        RegistrationPresenterImpl.registerUserToDb(email, password, this, mContext);
+        FirebaseRepository repository = new FirebaseRepository();
+
+        repository.registerUserToDb(email, password, this);
     }
 
     @Override
-    public void onUnecpectedError(String errMSg) {
+    public void onUnecpectedError(String errMsg) {
         if (mContext != null) {
-            mContext.setUnexpectedError(errMSg);
+            mContext.setUnexpectedError(errMsg);
         }
     }
 
@@ -64,10 +64,5 @@ public class RegistrationPresenter implements RegistrationContracts.Presenter, R
         if (mContext != null) {
             mContext.navigateToHome();
         }
-    }
-
-    @Override
-    public FirebaseAuth.AuthStateListener authListener(RegistrationContracts.OnLoginFinishedListener listener) {
-        return null;
     }
 }

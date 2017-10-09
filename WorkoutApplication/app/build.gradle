@@ -29,6 +29,10 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'com.google.firebase:firebase-auth:10.0.1'
     testCompile 'junit:junit:4.12'
+
+    // Modal window
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.sd6352051.niftydialogeffects:niftydialogeffects:1.0.0@aar'
 }
 
 

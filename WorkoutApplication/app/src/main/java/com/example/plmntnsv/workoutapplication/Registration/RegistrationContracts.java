@@ -22,14 +22,5 @@ public abstract class RegistrationContracts {
 
     public interface Presenter extends BaseContracts.Presenter<View>{
         void registerUser(String email, String password, String repeatedPassword);
-
-    }
-
-    public interface OnLoginFinishedListener{
-        void onUnecpectedError(String errMsg);
-        void onSuccess();
-        FirebaseAuth.AuthStateListener authListener(OnLoginFinishedListener listener);
-        //void registerUserToDb(String email, String password, OnLoginFinishedListener listener, RegistrationFragment view);
-
     }
 }

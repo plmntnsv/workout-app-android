@@ -8,16 +8,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.plmntnsv.workoutapplication.Home.HomeActivity;
 import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.Registration.RegistrationActivity;
+import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment implements LoginContracts.View {
+
+    private LoginContracts.Presenter mPresenter;
+    private EditText loginEmail;
+    private EditText loginPassword;
+    private Button loginBtn;
+    private TextView tvRegister;
+    private String mEmail;
+    private String mPassword;
+    private ModalWindow mModalWindow;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -29,37 +41,93 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_login, container, false);
 
-        Button logInBtn = root.findViewById(R.id.button_login);
+        loginEmail = root.findViewById(R.id.et_email);
+        loginPassword = root.findViewById(R.id.et_password);
+        loginBtn = root.findViewById(R.id.button_login);
 
-        logInBtn.setOnClickListener(new View.OnClickListener() {
+        mModalWindow = new ModalWindow();
+        mModalWindow.setup();
+        mModalWindow.show();
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(root.getContext(), HomeActivity.class);
-                root.getContext().startActivity(intent);
+               loginUser();
             }
         });
 
-        TextView tvRegister = root.findViewById(R.id.tv_register);
+        tvRegister = root.findViewById(R.id.tv_register);
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(root.getContext(), RegistrationActivity.class);
-                root.getContext().startActivity(intent);
+                navigateToRegister();
             }
         });
 
         return root;
     }
 
-    public static Fragment newInstance() {
+    public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
 
     @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(getContext(), HomeActivity.class);
+    public void onResume() {
+        mPresenter.subscribe(this);
+        super.onResume();
+    }
 
+    @Override
+    public void onPause() {
+        mPresenter.unsubscribe();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mPresenter = null;
+        super.onDestroy();
+    }
+
+    @Override
+    public void setPresenter(LoginContracts.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void loginUser() {
+        mEmail = loginEmail.getText().toString().trim();
+        mPassword = loginPassword.getText().toString().trim();
+
+        mPresenter.loginUser(mEmail, mPassword);
+    }
+
+    @Override
+    public void navigateToHome() {
+        Toast.makeText(getContext(), "Welcome " + mEmail, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void setUnexpectedError(String errMsg) {
+        Toast.makeText(getContext(), errMsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setInvalidEmailError() {
+        Toast.makeText(getContext(), "Invalid email!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setInvalidPasswordError() {
+        Toast.makeText(getContext(), "Invalid password!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void navigateToRegister(){
+        Intent intent = new Intent(getContext(), RegistrationActivity.class);
         getContext().startActivity(intent);
     }
 }

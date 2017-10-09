@@ -23,6 +23,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     private EditText registerEmail;
     private EditText registerPassword;
     private EditText registerPasswordRepeat;
+    private String mEmail;
 
     public RegistrationFragment() {
         // Required empty public constructor
@@ -80,15 +81,16 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
 
     @Override
     public void registerUser() {
-        String email = registerEmail.getText().toString().trim();
+        mEmail = registerEmail.getText().toString().trim();
         String password = registerPassword.getText().toString().trim();
         String repeatPassword = registerPasswordRepeat.getText().toString().trim();
 
-        mPresenter.registerUser(email, password, repeatPassword);
+        mPresenter.registerUser(mEmail, password, repeatPassword);
     }
 
     @Override
     public void navigateToHome() {
+        Toast.makeText(getContext(), "Welcome " + mEmail, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();
