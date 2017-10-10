@@ -1,9 +1,6 @@
 package com.example.plmntnsv.workoutapplication.Registration;
 
-import com.example.plmntnsv.workoutapplication.ExercisesList.ExercisesListContracts;
 import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.models.Exercise;
-import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by Plmn Tnsv on 08-Oct-17.

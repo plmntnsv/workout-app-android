@@ -8,4 +8,12 @@
     <string name="please_wait">Please wait...</string>
     <string name="drawer_item_logout">Logout</string>
     <string name="drawer_item_my_plans">Workout plans</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
 </resources>

@@ -1,7 +1,7 @@
 package com.example.plmntnsv.workoutapplication.ExercisesList;
 
 
-import com.example.plmntnsv.workoutapplication.models.Exercise;
+import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
 
 /**
  * Created by Plmn Tnsv on 07-Oct-17.
@@ -22,7 +22,7 @@ public class ExercisesListPresenter implements ExercisesListContracts.Presenter 
     @Override
     public void subscribe(ExercisesListContracts.View view) {
         mView = view;
-        mView.setExercises(mExercises);
+        //mView.setExercises(mExercises);
     }
 
     @Override

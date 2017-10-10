@@ -1,13 +1,14 @@
 package com.example.plmntnsv.workoutapplication.Login;
 
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseRepository;
-import com.example.plmntnsv.workoutapplication.repositoriy.base.BaseRepositoryContracts;
+import com.example.plmntnsv.workoutapplication.base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseLoginLogicRepository;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by Plmn Tnsv on 09-Oct-17.
  */
 
-public class LoginPresenter implements LoginContracts.Presenter, BaseRepositoryContracts.OnLoginFinishedListener {
+public class LoginPresenter implements LoginContracts.Presenter, BaseContracts.OnLoginFinishedListener {
     private LoginContracts.View mView;
     @Override
     public void subscribe(LoginContracts.View view) {
@@ -31,7 +32,7 @@ public class LoginPresenter implements LoginContracts.Presenter, BaseRepositoryC
             return;
         }
 
-        FirebaseRepository repository = new FirebaseRepository();
+        FirebaseLoginLogicRepository repository = new FirebaseLoginLogicRepository();
 
         repository.loginUser(email, password, this);
     }
@@ -44,7 +45,7 @@ public class LoginPresenter implements LoginContracts.Presenter, BaseRepositoryC
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(FirebaseUser user) {
         if (mView != null) {
             mView.navigateToHome();
         }

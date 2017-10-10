@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.plmntnsv.workoutapplication.R;
-import com.example.plmntnsv.workoutapplication.models.Exercise;
+import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,10 +87,5 @@ public class ExercisesListFragment extends Fragment implements ExercisesListCont
     @Override
     public void setPresenter(ExercisesListContracts.Presenter presenter) {
         mPresenter = presenter;
-    }
-
-    public void setExercises(Exercise[] exercises) {
-        mExercisesAdapter.clear();
-        mExercisesAdapter.addAll(exercises);
     }
 }

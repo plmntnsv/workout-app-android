@@ -50,6 +50,12 @@
             android:textAlignment="center"
             android:clickable="true"
             android:text="No account yet? Create one" />
+
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REMOVE ME LATER"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.plmntnsv.workoutapplication.Home.HomeActivity;
 import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.Registration.RegistrationActivity;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseDataLogicRepository;
 import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
 
 /**
@@ -23,13 +24,14 @@ import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
 public class LoginFragment extends Fragment implements LoginContracts.View {
 
     private LoginContracts.Presenter mPresenter;
-    private EditText loginEmail;
-    private EditText loginPassword;
-    private Button loginBtn;
-    private TextView tvRegister;
+    private EditText mLoginEmail;
+    private EditText mLoginPassword;
+    private Button mLoginBtn;
+    private TextView mTvRegister;
     private String mEmail;
     private String mPassword;
     private ModalWindow mModalWindow;
+    private Button mTestBtn;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -41,22 +43,34 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
                              Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_login, container, false);
 
-        loginEmail = root.findViewById(R.id.et_email);
-        loginPassword = root.findViewById(R.id.et_password);
-        loginBtn = root.findViewById(R.id.button_login);
-        String loggingIn = getResources().getString(R.string.logging_in);
+        mLoginEmail = root.findViewById(R.id.et_email);
+        mLoginPassword = root.findViewById(R.id.et_password);
+        mLoginBtn = root.findViewById(R.id.button_login);
 
+        mTestBtn = root.findViewById(R.id.btn_test);
+        final FirebaseDataLogicRepository repo = new FirebaseDataLogicRepository();
+
+        mTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Temp temp = new Temp();
+                //repo.populateDbWorkouts(temp.getAll());
+                repo.getAllChestExercises();
+            }
+        });
+
+        String loggingIn = getResources().getString(R.string.logging_in);
         mModalWindow = new ModalWindow(root, loggingIn);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                loginUser();
             }
         });
 
-        tvRegister = root.findViewById(R.id.tv_register);
-        tvRegister.setOnClickListener(new View.OnClickListener() {
+        mTvRegister = root.findViewById(R.id.tv_register);
+        mTvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navigateToRegister();
@@ -98,8 +112,8 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
     public void loginUser() {
         mModalWindow.show();
 
-        mEmail = loginEmail.getText().toString().trim();
-        mPassword = loginPassword.getText().toString().trim();
+        mEmail = mLoginEmail.getText().toString().trim();
+        mPassword = mLoginPassword.getText().toString().trim();
 
         mPresenter.loginUser(mEmail, mPassword);
     }
@@ -107,7 +121,7 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
     @Override
     public void navigateToHome() {
         mModalWindow.hide();
-        Toast.makeText(getContext(), "Welcome!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();

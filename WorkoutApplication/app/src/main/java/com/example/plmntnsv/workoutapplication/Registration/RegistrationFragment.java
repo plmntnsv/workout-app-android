@@ -41,7 +41,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
        registerPassword = root.findViewById(R.id.et_registerPassword);
        registerPasswordRepeat = root.findViewById(R.id.et_registerRepeatPassword);
 
-        String register = getResources().getString(R.string.logging_in);
+        String register = getResources().getString(R.string.signing_up);
 
         mModalWindow = new ModalWindow(root, register);
 
@@ -100,7 +100,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     @Override
     public void navigateToHome() {
         mModalWindow.hide();
-        Toast.makeText(getContext(), "Welcome " + mEmail, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Registration successful", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();

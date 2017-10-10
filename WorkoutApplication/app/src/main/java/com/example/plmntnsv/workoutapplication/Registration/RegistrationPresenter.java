@@ -1,13 +1,15 @@
 package com.example.plmntnsv.workoutapplication.Registration;
 
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseRepository;
-import com.example.plmntnsv.workoutapplication.repositoriy.base.BaseRepositoryContracts;
+import com.example.plmntnsv.workoutapplication.base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseDataLogicRepository;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseLoginLogicRepository;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by Plmn Tnsv on 08-Oct-17.
  */
 
-public class RegistrationPresenter implements RegistrationContracts.Presenter, BaseRepositoryContracts.OnLoginFinishedListener {
+public class RegistrationPresenter implements RegistrationContracts.Presenter, BaseContracts.OnLoginFinishedListener {
     private RegistrationContracts.View mView;
     private RegistrationFragment mContext;
 
@@ -47,7 +49,7 @@ public class RegistrationPresenter implements RegistrationContracts.Presenter, B
             return;
         }
 
-        FirebaseRepository repository = new FirebaseRepository();
+        FirebaseLoginLogicRepository repository = new FirebaseLoginLogicRepository();
 
         repository.registerUserToDb(email, password, this);
     }
@@ -60,9 +62,12 @@ public class RegistrationPresenter implements RegistrationContracts.Presenter, B
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(FirebaseUser user) {
         if (mContext != null) {
             mContext.navigateToHome();
         }
+
+        FirebaseDataLogicRepository repository = new FirebaseDataLogicRepository();
+        repository.postUserToDb(user.getUid(), user.getEmail());
     }
 }

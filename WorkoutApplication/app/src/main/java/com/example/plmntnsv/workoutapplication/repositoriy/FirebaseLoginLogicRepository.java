@@ -1,11 +1,8 @@
 package com.example.plmntnsv.workoutapplication.repositoriy;
 
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
-import com.example.plmntnsv.workoutapplication.Login.LoginContracts;
-import com.example.plmntnsv.workoutapplication.Login.LoginFragment;
-import com.example.plmntnsv.workoutapplication.Registration.RegistrationFragment;
+import com.example.plmntnsv.workoutapplication.base.BaseContracts;
 import com.example.plmntnsv.workoutapplication.repositoriy.base.BaseRepositoryContracts;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,17 +14,17 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by Plmn Tnsv on 08-Oct-17.
  */
 
-public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools {
+public class FirebaseLoginLogicRepository implements BaseRepositoryContracts.FirebaseLoginTools {
 
     private static FirebaseAuth mAuth;
     private static FirebaseAuth.AuthStateListener mListener;
     private static FirebaseUser mUser;
 
-    public FirebaseRepository() {
+    public FirebaseLoginLogicRepository() {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public void registerUserToDb(String email, String password, final BaseRepositoryContracts.OnLoginFinishedListener listener) {
+    public void registerUserToDb(String email, String password, final BaseContracts.OnLoginFinishedListener listener) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -36,14 +33,14 @@ public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools
                             listener.onUnecpectedError("Unexpected error. " + task.getException());
                         } else {
                             mUser = mAuth.getCurrentUser();
-                            listener.onSuccess();
+                            listener.onSuccess(mUser);
                         }
                     }
                 });
     }
 
     @Override
-    public void loginUser(String email, String password, final BaseRepositoryContracts.OnLoginFinishedListener listener) {
+    public void loginUser(String email, String password, final BaseContracts.OnLoginFinishedListener listener) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -52,7 +49,7 @@ public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools
                             listener.onUnecpectedError("Unexpected error. " + task.getException());
                         } else {
                             mUser = mAuth.getCurrentUser();
-                            listener.onSuccess();
+                            listener.onSuccess(mUser);
                         }
                     }
                 });
@@ -60,7 +57,7 @@ public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools
     }
 
     @Override
-    public void logoutUser(final BaseRepositoryContracts.OnLogoutFinishedListener listener) {
+    public void logoutUser(final BaseContracts.OnLogoutFinishedListener listener) {
         mUser = null;
         listener.onLogout();
     }
@@ -71,7 +68,7 @@ public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools
     }
 
     @Override
-    public FirebaseAuth.AuthStateListener authListener(final BaseRepositoryContracts.OnLoginFinishedListener listener) {
+    public FirebaseAuth.AuthStateListener authListener(final BaseContracts.OnLoginFinishedListener listener) {
         mListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
