@@ -7,7 +7,7 @@ import android.view.View;
  */
 
 public interface ModalWindowLogic {
-    void setup(View view);
+    void setup(View view, String title);
     void show();
     void hide();
 }

@@ -3,9 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="spinnerColor">#FFAE2020</color>
-    <color name="modalDividerColor">#FFCFCFCF</color>
-    <color name="modalTitleColor">#FFA9A9A9</color>
-    <color name="modalDialogColor">#FF404040</color>
-    <color name="modalMessageColor">#FF5DADE2</color>
+    <color name="blue">#FF21678C</color>
+    <color name="lightGrey">#FFCFCFCF</color>
+    <color name="grey">#FFA9A9A9</color>
+    <color name="darkGrey">#FF404040</color>
+    <color name="lighBlue">#FF5DADE2</color>
 </resources>

@@ -1,18 +1,22 @@
 package com.example.plmntnsv.workoutapplication.Home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.plmntnsv.workoutapplication.Login.LoginActivity;
 import com.example.plmntnsv.workoutapplication.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+    private HomeContracts.Presenter mPresenter;
 
 
     public HomeFragment() {
@@ -27,9 +31,8 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    public static Fragment newInstance() {
+    public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
     }
-
 }

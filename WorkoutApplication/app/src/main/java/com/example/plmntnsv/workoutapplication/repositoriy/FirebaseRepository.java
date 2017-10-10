@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by Plmn Tnsv on 08-Oct-17.
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools {
 
     private static FirebaseAuth mAuth;
+    private static FirebaseAuth.AuthStateListener mListener;
+    private static FirebaseUser mUser;
 
     public FirebaseRepository() {
         mAuth = FirebaseAuth.getInstance();
@@ -29,10 +32,10 @@ public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //Toast.makeText(view.getContext(), "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                         if (!task.isSuccessful()) {
                             listener.onUnecpectedError("Unexpected error. " + task.getException());
                         } else {
+                            mUser = mAuth.getCurrentUser();
                             listener.onSuccess();
                         }
                     }
@@ -48,6 +51,7 @@ public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools
                         if (!task.isSuccessful()) {
                             listener.onUnecpectedError("Unexpected error. " + task.getException());
                         } else {
+                            mUser = mAuth.getCurrentUser();
                             listener.onSuccess();
                         }
                     }
@@ -56,16 +60,33 @@ public class FirebaseRepository implements BaseRepositoryContracts.FirebaseTools
     }
 
     @Override
-    public FirebaseAuth.AuthStateListener authListener(BaseRepositoryContracts.OnLoginFinishedListener listener) {
-        return null;
-        //firebaseAuth -> {
-//            FirebaseUser user = firebaseAuth.getCurrentUser();
-//            if (user != null) {
-//                listener.onSuccess();
-//            } else {
-//                // User is signed out
-//                listener.onUsernameError();
-//            }
-//        };
+    public void logoutUser(final BaseRepositoryContracts.OnLogoutFinishedListener listener) {
+        mUser = null;
+        listener.onLogout();
+    }
+
+    @Override
+    public FirebaseUser getCurrentUser() {
+        return mUser;
+    }
+
+    @Override
+    public FirebaseAuth.AuthStateListener authListener(final BaseRepositoryContracts.OnLoginFinishedListener listener) {
+        mListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (mUser != null) {
+                    //listener.onSuccess();
+                } else {
+                    // User is signed out
+                    //listener.onUnecpectedError("asd");
+                }
+            }
+        };
+
+        mAuth.addAuthStateListener(mListener);
+
+        return mListener;
     }
 }

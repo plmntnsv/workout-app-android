@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.utils.contracts.ModalWindowLogic;
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 /**
@@ -13,18 +14,19 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 public class ModalWindow implements ModalWindowLogic {
     private NiftyDialogBuilder dialogBuilder;
 
-    public ModalWindow(View view){
+    public ModalWindow(View view, String title){
         dialogBuilder = NiftyDialogBuilder.getInstance(view.getContext());
-        this.setup(view);
+        this.setup(view, title);
     }
 
     @Override
-    public void setup(View view) {
+    public void setup(View view, String title) {
         dialogBuilder
-                .withTitle("Loading...")
-                .withTitleColor(R.color.modalMessageColor)
-                .withDividerColor(R.color.modalMessageColor)
-                .withDialogColor("#FF5DADE2")
+                .withTitle(title)
+                .withTitleColor("#FF000000")
+                .withDividerColor("#FF5DADE2")
+                .withDialogColor("#FFE8E8E8")
+                .withEffect(Effectstype.Slidetop)
                 .isCancelableOnTouchOutside(false)
                 .setCustomView(R.layout.modal_loading, view.getContext());
     }

@@ -18,8 +18,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mPresenter = new LoginPresenter();
         mView = LoginFragment.newInstance();
-
         mView.setPresenter(mPresenter);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_content, mView)

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.plmntnsv.workoutapplication.Home.HomeActivity;
 import com.example.plmntnsv.workoutapplication.R;
+import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -24,6 +25,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     private EditText registerPassword;
     private EditText registerPasswordRepeat;
     private String mEmail;
+    private ModalWindow mModalWindow;
 
     public RegistrationFragment() {
         // Required empty public constructor
@@ -38,6 +40,10 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
        registerEmail = root.findViewById(R.id.et_registerEmail);
        registerPassword = root.findViewById(R.id.et_registerPassword);
        registerPasswordRepeat = root.findViewById(R.id.et_registerRepeatPassword);
+
+        String register = getResources().getString(R.string.logging_in);
+
+        mModalWindow = new ModalWindow(root, register);
 
         Button registerBtn = root.findViewById(R.id.btn_register);
 
@@ -64,12 +70,14 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
 
     @Override
     public void onPause() {
+        mModalWindow.hide();
         mPresenter.unsubscribe();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
+        mModalWindow.hide();
         mPresenter = null;
         super.onDestroy();
     }
@@ -81,6 +89,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
 
     @Override
     public void registerUser() {
+        mModalWindow.show();
         mEmail = registerEmail.getText().toString().trim();
         String password = registerPassword.getText().toString().trim();
         String repeatPassword = registerPasswordRepeat.getText().toString().trim();
@@ -90,6 +99,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
 
     @Override
     public void navigateToHome() {
+        mModalWindow.hide();
         Toast.makeText(getContext(), "Welcome " + mEmail, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), HomeActivity.class);
         startActivity(intent);
@@ -97,22 +107,27 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     }
 
     public void setUnexpectedError(String errMsg) {
+        mModalWindow.hide();
         Toast.makeText(getContext(), errMsg, Toast.LENGTH_SHORT).show();
     }
 
     public void setEmailEmptyError() {
+        mModalWindow.hide();
         Toast.makeText(getContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
     }
 
     public void setPasswordEmptyError() {
+        mModalWindow.hide();
         Toast.makeText(getContext(), "Enter password!", Toast.LENGTH_SHORT).show();
     }
 
     public void setPasswordTooShortError() {
+        mModalWindow.hide();
         Toast.makeText(getContext(), "Password must be minimum 6 characters!", Toast.LENGTH_SHORT).show();
     }
 
     public void setPasswordMissMatchError() {
+        mModalWindow.hide();
         Toast.makeText(getContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
     }
 }

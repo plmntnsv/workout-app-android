@@ -44,8 +44,9 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
         loginEmail = root.findViewById(R.id.et_email);
         loginPassword = root.findViewById(R.id.et_password);
         loginBtn = root.findViewById(R.id.button_login);
+        String loggingIn = getResources().getString(R.string.logging_in);
 
-        mModalWindow = new ModalWindow(root);
+        mModalWindow = new ModalWindow(root, loggingIn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +107,7 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
     @Override
     public void navigateToHome() {
         mModalWindow.hide();
-        Toast.makeText(getContext(), "Welcome " + mEmail, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Welcome!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();
@@ -120,7 +121,7 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
 
     @Override
     public void setInvalidEmailError() {
-        //mModalWindow.hide();
+        mModalWindow.hide();
         Toast.makeText(getContext(), "Invalid email!", Toast.LENGTH_SHORT).show();
     }
 
