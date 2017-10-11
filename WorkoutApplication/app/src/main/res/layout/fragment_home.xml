@@ -3,21 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.plmntnsv.workoutapplication.Home.HomeFragment">
-
     <LinearLayout
+        android:id="@+id/display_pinned_workout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/display_btns"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <Button
+            android:id="@+id/btn_create_plan"
             android:layout_marginTop="100dp"
             android:text="Create workout plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/btn_help_wizzard"
             android:text="Get help creating a plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/btn_find_gyms"
             android:text="Find local gyms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

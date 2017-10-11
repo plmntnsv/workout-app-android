@@ -2,7 +2,7 @@ package com.example.plmntnsv.workoutapplication.Registration;
 
 import com.example.plmntnsv.workoutapplication.base.BaseContracts;
 import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseDataLogicRepository;
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseLoginLogicRepository;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseAuthLogicRepository;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
@@ -11,11 +11,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegistrationPresenter implements RegistrationContracts.Presenter, BaseContracts.OnLoginFinishedListener {
     private RegistrationContracts.View mView;
-    private RegistrationFragment mContext;
-
-    public RegistrationPresenter(RegistrationFragment context){
-        mContext = context;
-    }
+    private FirebaseAuthLogicRepository mAuthRepository;
+    private FirebaseDataLogicRepository mDataRepository;
 
     @Override
     public void subscribe(RegistrationContracts.View view) {
@@ -30,44 +27,44 @@ public class RegistrationPresenter implements RegistrationContracts.Presenter, B
     @Override
     public void registerUser(String email, String password, String repeatPassword) {
         if (android.text.TextUtils.isEmpty(email)) {
-            mContext.setEmailEmptyError();
+            mView.setEmailEmptyError();
             return;
         }
 
         if (android.text.TextUtils.isEmpty(password)) {
-            mContext.setPasswordEmptyError();
+            mView.setPasswordEmptyError();
             return;
         }
 
         if (password.length() < 6) {
-            mContext.setPasswordTooShortError();
+            mView.setPasswordTooShortError();
             return;
         }
 
         if (!(password.equals(repeatPassword))) {
-            mContext.setPasswordMissMatchError();
+            mView.setPasswordMissMatchError();
             return;
         }
 
-        FirebaseLoginLogicRepository repository = new FirebaseLoginLogicRepository();
+        mAuthRepository = new FirebaseAuthLogicRepository();
 
-        repository.registerUserToDb(email, password, this);
+        mAuthRepository.registerUserToDb(email, password, this);
     }
 
     @Override
     public void onUnecpectedError(String errMsg) {
-        if (mContext != null) {
-            mContext.setUnexpectedError(errMsg);
+        if (mView != null) {
+            mView.setUnexpectedError(errMsg);
         }
     }
 
     @Override
     public void onSuccess(FirebaseUser user) {
-        if (mContext != null) {
-            mContext.navigateToHome();
+        if (mView != null) {
+            mView.navigateToHome();
         }
 
-        FirebaseDataLogicRepository repository = new FirebaseDataLogicRepository();
-        repository.postUserToDb(user.getUid(), user.getEmail());
+        mDataRepository = new FirebaseDataLogicRepository();
+        mDataRepository.postUserToDb(user.getUid(), user.getEmail());
     }
 }

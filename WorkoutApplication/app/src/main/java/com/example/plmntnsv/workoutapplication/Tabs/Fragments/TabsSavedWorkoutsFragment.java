@@ -1,26 +1,21 @@
-package com.example.plmntnsv.workoutapplication.Tabs;
+package com.example.plmntnsv.workoutapplication.Tabs.Fragments;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.example.plmntnsv.workoutapplication.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TabsFragment extends Fragment {
-    private static final int WORKOUTS_COUNT = 7;
+public class TabsSavedWorkoutsFragment extends Fragment {
 
-    public TabsFragment() {
+    public TabsSavedWorkoutsFragment() {
         // Required empty public constructor
     }
 
@@ -28,7 +23,7 @@ public class TabsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_tabs, container, false);
+        View root = inflater.inflate(R.layout.fragment_tabs_saved, container, false);
 
         int position = this.getArguments().getInt("position");
 
@@ -36,11 +31,16 @@ public class TabsFragment extends Fragment {
         return root;
     }
 
-    public static TabsFragment createFragment(int position) {
-        TabsFragment fragment = new TabsFragment();
+    public static TabsSavedWorkoutsFragment createFragment(int position) {
+        TabsSavedWorkoutsFragment fragment = new TabsSavedWorkoutsFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
         fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static TabsSavedWorkoutsFragment newInstance() {
+        TabsSavedWorkoutsFragment fragment = new TabsSavedWorkoutsFragment();
         return fragment;
     }
 }

@@ -46,16 +46,15 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
         mLoginEmail = root.findViewById(R.id.et_email);
         mLoginPassword = root.findViewById(R.id.et_password);
         mLoginBtn = root.findViewById(R.id.button_login);
-
+        //TODO:delete later
         mTestBtn = root.findViewById(R.id.btn_test);
         final FirebaseDataLogicRepository repo = new FirebaseDataLogicRepository();
-
         mTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Temp temp = new Temp();
                 //repo.populateDbWorkouts(temp.getAll());
-                repo.getAllChestExercises();
+                //repo.getAllChestExercisesFromDb();
             }
         });
 

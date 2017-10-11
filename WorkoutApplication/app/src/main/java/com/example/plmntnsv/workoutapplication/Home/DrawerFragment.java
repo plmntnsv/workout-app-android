@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.plmntnsv.workoutapplication.Login.LoginActivity;
 import com.example.plmntnsv.workoutapplication.R;
+import com.example.plmntnsv.workoutapplication.Tabs.Fragments.TabsFragmentType;
 import com.example.plmntnsv.workoutapplication.Tabs.TabsActivity;
 import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -95,12 +96,6 @@ public class DrawerFragment extends Fragment implements HomeContracts.View {
                 .build();
     }
 
-    private void navigateToMyWorkouts() {
-        Toast.makeText(getContext(), "Logout successful", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getContext(), TabsActivity.class);
-        startActivity(intent);
-    }
-
     protected void setupHeader(){
         mHeaderResult = new AccountHeaderBuilder()
                 .withActivity(getActivity())
@@ -161,5 +156,11 @@ public class DrawerFragment extends Fragment implements HomeContracts.View {
     @Override
     public void logoutCurrentUser() {
         mPresenter.logoutUser();
+    }
+
+    private void navigateToMyWorkouts() {
+        Intent intent = new Intent(getContext(), TabsActivity.class);
+        intent.putExtra("type", TabsFragmentType.SAVED);
+        startActivity(intent);
     }
 }

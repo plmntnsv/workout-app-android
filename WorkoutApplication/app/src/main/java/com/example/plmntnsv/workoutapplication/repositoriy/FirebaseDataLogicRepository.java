@@ -1,8 +1,6 @@
 package com.example.plmntnsv.workoutapplication.repositoriy;
 
-import android.support.constraint.solver.widgets.Snapshot;
-import android.widget.Toast;
-
+import com.example.plmntnsv.workoutapplication.base.BaseContracts;
 import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
 import com.example.plmntnsv.workoutapplication.models.Workout.Workout;
 import com.example.plmntnsv.workoutapplication.repositoriy.base.BaseRepositoryContracts;
@@ -24,71 +22,91 @@ public class FirebaseDataLogicRepository implements BaseRepositoryContracts.Fire
     private final static String USER_EMAIL = "email";
     private final static String USER_WORKOUT_PATH = "workouts";
     private final static String EXERCISE_PATH = "exercises";
-    private static DatabaseReference mDatabaseRef;
-    private final FirebaseDatabase mDataBase;
+    private final static String EXERCISE_CHEST_PATH = EXERCISE_PATH + "/chest";
+    private final static String EXERCISE_ARMS_PATH = EXERCISE_PATH + "/arms";
+    private final static String EXERCISE_BACK_PATH = EXERCISE_PATH + "/back";
+    private final static String EXERCISE_SHOULDERS_PATH = EXERCISE_PATH + "/shoulders";
+    private final static String EXERCISE_CARDIO_PATH = EXERCISE_PATH + "/cardio";
+    private final static String EXERCISE_CORE_PATH = EXERCISE_PATH + "/core";
+    private final static String EXERCISE_LEGS_PATH = EXERCISE_PATH + "/legs";
 
-    public FirebaseDataLogicRepository(){
+    private static DatabaseReference mDatabaseRef;
+    private static FirebaseDatabase mDataBase;
+
+    public FirebaseDataLogicRepository() {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         mDataBase = FirebaseDatabase.getInstance();
     }
 
     @Override
-    public ArrayList<Exercise> getAllExercises() {
-        final ArrayList<Exercise> allExercises = new ArrayList<>();
+    public ArrayList<ArrayList<Exercise>> getAllExercises(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        final ArrayList<ArrayList<Exercise>> allExercises = new ArrayList<>();
 
-        return null;
+        allExercises.add(getAllArmsExercisesFromDb(listener));
+        allExercises.add(getAllBackExercisesFromDb(listener));
+        allExercises.add(getAllCardioExercisesFromDb(listener));
+        allExercises.add(getAllChestExercisesFromDb(listener));
+        allExercises.add(getAllCoreExercisesFromDb(listener));
+        allExercises.add(getAllLegsExercisesFromDb(listener));
+        allExercises.add(getAllShouldersExercisesFromDb(listener));
+
+        return allExercises;
     }
 
     @Override
-    public ArrayList<Exercise> getAllChestExercises() {
-        final ArrayList<Exercise> chestEx = new ArrayList<>();
-        mDataBase.getReference(EXERCISE_PATH+"/chest").addListenerForSingleValueEvent(new ValueEventListener() {
+    public ArrayList<Exercise> getAllChestExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        return getExercisesFromPath(EXERCISE_CHEST_PATH, listener);
+    }
+
+    @Override
+    public ArrayList<Exercise> getAllArmsExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        return getExercisesFromPath(EXERCISE_ARMS_PATH, listener);
+    }
+
+    @Override
+    public ArrayList<Exercise> getAllBackExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        return getExercisesFromPath(EXERCISE_BACK_PATH, listener);
+    }
+
+    @Override
+    public ArrayList<Exercise> getAllShouldersExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        return getExercisesFromPath(EXERCISE_SHOULDERS_PATH, listener);
+    }
+
+    @Override
+    public ArrayList<Exercise> getAllCardioExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        return getExercisesFromPath(EXERCISE_CARDIO_PATH, listener);
+    }
+
+    @Override
+    public ArrayList<Exercise> getAllCoreExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        return getExercisesFromPath(EXERCISE_CORE_PATH, listener);
+    }
+
+    @Override
+    public ArrayList<Exercise> getAllLegsExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener) {
+        return getExercisesFromPath(EXERCISE_LEGS_PATH, listener);
+    }
+
+    private ArrayList<Exercise> getExercisesFromPath(String path, final BaseContracts.OnSuccessfulDataTrasfer listener) {
+        final ArrayList<Exercise> exercises = new ArrayList<>();
+        mDataBase.getReference(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Object snp = snapshot.getValue(false);
                     Exercise exercise = snapshot.getValue(Exercise.class);
-                    chestEx.add(exercise);
+                    exercises.add(exercise);
                 }
+                listener.onSuccess();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("The read failed: " + databaseError.getCode());
+                listener.onUnecpectedError(databaseError.getMessage());
             }
         });
 
-        return chestEx;
-    }
-
-    @Override
-    public ArrayList<Exercise> getAllArmsExercises() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Exercise> getAllBackExercises() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Exercise> getAllShouldersExercises() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Exercise> getAllCardioExercises() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Exercise> getAllCoreExercises() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Exercise> getAllLegsExercises() {
-        return null;
+        return exercises;
     }
 
     @Override
@@ -101,21 +119,43 @@ public class FirebaseDataLogicRepository implements BaseRepositoryContracts.Fire
         mDatabaseRef.child(USER_PATH).child(uid).child(USER_WORKOUT_PATH).setValue(workout);
     }
 
+    //TODO:delete if not used
     @Override
     public void postExerciseToWorkout() {
 
     }
 
     @Override
-    public ArrayList<Workout> getAllUserWorkouts() {
-        return null;
+    public ArrayList<Workout> getAllUserWorkouts(String uid, final BaseContracts.OnSuccessfulDataTrasfer listener) {
+        String path = USER_PATH + "/" + uid + USER_WORKOUT_PATH;
+        final ArrayList<Workout> workouts = new ArrayList<>();
+
+        mDataBase.getReference(path).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Workout workout = snapshot.getValue(Workout.class);
+                    workouts.add(workout);
+                }
+                listener.onSuccess();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onUnecpectedError(databaseError.getMessage());
+            }
+        });
+
+        return workouts;
     }
 
-    public void populateDbWorkouts(List<ArrayList<Exercise>> exercises){
-        for(ArrayList<Exercise> alEx : exercises){
-            for (Exercise ex : alEx){
+    //TODO:delete me later
+    public void populateDbWorkouts(List<ArrayList<Exercise>> exercises) {
+        for (ArrayList<Exercise> alEx : exercises) {
+            for (Exercise ex : alEx) {
                 mDatabaseRef.child(EXERCISE_PATH).child(ex.getCategory().toString().toLowerCase()).child(ex.getName()).setValue(ex);
             }
-        };
+        }
+        ;
     }
 }

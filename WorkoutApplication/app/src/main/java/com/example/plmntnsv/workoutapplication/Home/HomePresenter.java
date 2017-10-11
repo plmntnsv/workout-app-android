@@ -1,7 +1,7 @@
 package com.example.plmntnsv.workoutapplication.Home;
 
 import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseLoginLogicRepository;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseAuthLogicRepository;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
@@ -9,12 +9,12 @@ import com.google.firebase.auth.FirebaseUser;
  */
 
 public class HomePresenter implements HomeContracts.Presenter, BaseContracts.OnLogoutFinishedListener {
-    private final FirebaseLoginLogicRepository mRepository;
+    private final FirebaseAuthLogicRepository mRepository;
     private HomeContracts.View mView;
     private FirebaseUser mUser;
 
     public HomePresenter(){
-        mRepository = new FirebaseLoginLogicRepository();
+        mRepository = new FirebaseAuthLogicRepository();
     }
 
     @Override

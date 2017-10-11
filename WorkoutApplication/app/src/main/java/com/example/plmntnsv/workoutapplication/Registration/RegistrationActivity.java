@@ -15,8 +15,8 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        mPresenter = new RegistrationPresenter();
         mView = RegistrationFragment.newInstance();
-        mPresenter = new RegistrationPresenter(mView);
         mView.setPresenter(mPresenter);
 
         getSupportFragmentManager()

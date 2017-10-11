@@ -25,4 +25,10 @@ public abstract class BaseContracts {
     public interface  OnLogoutFinishedListener {
         void onLogout();
     }
+
+    public interface OnSuccessfulDataTrasfer{
+        void onUnecpectedError(String errMsg);
+
+        void onSuccess();
+    }
 }

@@ -14,13 +14,13 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by Plmn Tnsv on 08-Oct-17.
  */
 
-public class FirebaseLoginLogicRepository implements BaseRepositoryContracts.FirebaseLoginTools {
+public class FirebaseAuthLogicRepository implements BaseRepositoryContracts.FirebaseLoginTools {
 
     private static FirebaseAuth mAuth;
     private static FirebaseAuth.AuthStateListener mListener;
     private static FirebaseUser mUser;
 
-    public FirebaseLoginLogicRepository() {
+    public FirebaseAuthLogicRepository() {
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -67,6 +67,7 @@ public class FirebaseLoginLogicRepository implements BaseRepositoryContracts.Fir
         return mUser;
     }
 
+    //TODO:remove if not used
     @Override
     public FirebaseAuth.AuthStateListener authListener(final BaseContracts.OnLoginFinishedListener listener) {
         mListener = new FirebaseAuth.AuthStateListener() {

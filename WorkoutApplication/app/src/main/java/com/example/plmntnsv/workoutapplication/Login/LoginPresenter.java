@@ -1,7 +1,7 @@
 package com.example.plmntnsv.workoutapplication.Login;
 
 import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseLoginLogicRepository;
+import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseAuthLogicRepository;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
@@ -32,7 +32,7 @@ public class LoginPresenter implements LoginContracts.Presenter, BaseContracts.O
             return;
         }
 
-        FirebaseLoginLogicRepository repository = new FirebaseLoginLogicRepository();
+        FirebaseAuthLogicRepository repository = new FirebaseAuthLogicRepository();
 
         repository.loginUser(email, password, this);
     }
