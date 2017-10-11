@@ -1,10 +1,9 @@
-package com.example.plmntnsv.workoutapplication.models.PopulateDB;
+package com.example.plmntnsv.workoutapplication.Models.PopulateDB;
 
-import com.example.plmntnsv.workoutapplication.models.Exercise.Category;
-import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Category;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Exercise;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Plmn Tnsv on 10-Oct-17.

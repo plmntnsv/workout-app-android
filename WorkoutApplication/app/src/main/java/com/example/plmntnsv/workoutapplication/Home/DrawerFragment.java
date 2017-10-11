@@ -15,7 +15,7 @@ import com.example.plmntnsv.workoutapplication.Login.LoginActivity;
 import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.Tabs.Fragments.TabsFragmentType;
 import com.example.plmntnsv.workoutapplication.Tabs.TabsActivity;
-import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
+import com.example.plmntnsv.workoutapplication.Utils.ModalWindow;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -25,7 +25,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 /**
  * A simple {@link Fragment} subclass.

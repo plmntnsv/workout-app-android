@@ -1,7 +1,7 @@
 package com.example.plmntnsv.workoutapplication.WorkoutCreate;
 
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Exercise;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;

@@ -1,6 +1,10 @@
-package com.example.plmntnsv.workoutapplication.base;
+package com.example.plmntnsv.workoutapplication.Base;
 
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Exercise;
+import com.example.plmntnsv.workoutapplication.Models.Workout.Workout;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 
 /**
  * Created by Plmn Tnsv on 07-Oct-17.
@@ -26,9 +30,15 @@ public abstract class BaseContracts {
         void onLogout();
     }
 
-    public interface OnSuccessfulDataTrasfer{
+    public interface OnSuccessfulExerciseDataTrasfer {
         void onUnecpectedError(String errMsg);
 
-        void onSuccess();
+        void onSuccess(ArrayList<Exercise> exercises);
+    }
+
+    public interface OnSuccessfulWorkoutDataTrasfer {
+        void onUnecpectedError(String errMsg);
+
+        void onSuccess(ArrayList<Workout> exercises);
     }
 }

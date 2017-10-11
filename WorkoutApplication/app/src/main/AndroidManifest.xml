@@ -16,14 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ExercisesList.ExercisesListActivity" />
+        <activity android:name=".ExercisesListDELETE.elActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".Registration.RegistrationActivity" />
-
-        <uses-permission android:name="android.permission.INTERNET" />
-
         <activity android:name=".Tabs.TabsActivity" />
-        <activity android:name=".WorkoutCreate.WorkoutCreateActivity"></activity>
+        <activity android:name=".WorkoutCreate.WorkoutCreateActivity" />
+        <activity android:name=".ExercisesList.ExercisesListActivity"></activity>
+        <uses-permission android:name="android.permission.INTERNET" />
     </application>
 
 </manifest>

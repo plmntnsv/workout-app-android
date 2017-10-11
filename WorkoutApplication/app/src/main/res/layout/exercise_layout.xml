@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_ex_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="tv_ex_title" />
+
+    <TextView
+        android:id="@+id/tv_ex_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="tv_ex_description" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="Repetitions:"/>
+        <EditText
+            android:id="@+id/et_repetitions"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sets:"/>
+        <EditText
+            android:id="@+id/et_sets"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weights:"/>
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_current_ex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add" />
+
+</LinearLayout>

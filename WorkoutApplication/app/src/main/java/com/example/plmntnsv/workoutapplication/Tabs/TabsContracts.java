@@ -1,6 +1,6 @@
 package com.example.plmntnsv.workoutapplication.Tabs;
 
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
 
 /**
  * Created by Plmn Tnsv on 11-Oct-17.

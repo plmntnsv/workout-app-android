@@ -1,7 +1,6 @@
 package com.example.plmntnsv.workoutapplication.Login;
 
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.utils.contracts.LoadingView;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
 
 /**
  * Created by Plmn Tnsv on 09-Oct-17.

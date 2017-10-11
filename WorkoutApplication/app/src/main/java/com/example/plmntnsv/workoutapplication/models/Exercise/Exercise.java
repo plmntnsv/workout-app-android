@@ -1,4 +1,4 @@
-package com.example.plmntnsv.workoutapplication.models.Exercise;
+package com.example.plmntnsv.workoutapplication.Models.Exercise;
 
 /**
  * Created by Plmn Tnsv on 07-Oct-17.

@@ -1,7 +1,6 @@
 package com.example.plmntnsv.workoutapplication.Home;
 
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
 
 /**
  * Created by Plmn Tnsv on 10-Oct-17.

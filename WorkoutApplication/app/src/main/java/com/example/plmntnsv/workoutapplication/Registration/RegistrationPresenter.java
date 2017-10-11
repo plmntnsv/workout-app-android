@@ -1,8 +1,8 @@
 package com.example.plmntnsv.workoutapplication.Registration;
 
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseDataLogicRepository;
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseAuthLogicRepository;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.Repositoriy.FirebaseDataLogicRepository;
+import com.example.plmntnsv.workoutapplication.Repositoriy.FirebaseAuthLogicRepository;
 import com.google.firebase.auth.FirebaseUser;
 
 /**

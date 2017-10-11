@@ -1,30 +1,28 @@
 package com.example.plmntnsv.workoutapplication.ExercisesList;
 
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Category;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Exercise;
 import com.example.plmntnsv.workoutapplication.R;
-import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ExercisesListFragment extends Fragment implements ExercisesListContracts.View {
 
-
-    private ListView mListViewWorkouts;
-    private ArrayAdapter<Exercise> mExercisesAdapter;
     private ExercisesListContracts.Presenter mPresenter;
+    private ExercisesListAdapter mAdapter;
+    private Category mCategory;
+    private View mRoot;
 
     public ExercisesListFragment() {
         // Required empty public constructor
@@ -34,36 +32,21 @@ public class ExercisesListFragment extends Fragment implements ExercisesListCont
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_exercises_list, container, false);
+        mRoot = inflater.inflate(R.layout.fragment_exercises_list, container, false);
 
-        mExercisesAdapter = new ArrayAdapter<Exercise>(getContext(), android.R.layout.simple_list_item_1) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                TextView view = null;
-                if (convertView == null || !(convertView instanceof TextView)) {
-                    LayoutInflater viewInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    view = (TextView) viewInflater.inflate(android.R.layout.simple_list_item_1, null);
-                } else {
-                    view = (TextView) convertView;
-                }
+        this.getExercises(mCategory);
 
-                view.setText(getItem(position).getName());
-
-                return view;
-            }
-        };
-
-
-        mListViewWorkouts = root.findViewById(R.id.lv_exercises);
-        mListViewWorkouts.setAdapter(mExercisesAdapter);
-
-        return root;
+        return mRoot;
     }
 
     public static ExercisesListFragment newInstance() {
         ExercisesListFragment fragment = new ExercisesListFragment();
         return fragment;
+    }
+
+    @Override
+    public void setPresenter(ExercisesListContracts.Presenter presenter) {
+        mPresenter = presenter;
     }
 
     @Override
@@ -85,7 +68,22 @@ public class ExercisesListFragment extends Fragment implements ExercisesListCont
     }
 
     @Override
-    public void setPresenter(ExercisesListContracts.Presenter presenter) {
-        mPresenter = presenter;
+    public void displayUnexpectedError(String errMsg) {
+        Toast.makeText(getContext(), errMsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayOnSuccess(ArrayList<Exercise> exercises) {
+        mAdapter = new ExercisesListAdapter(mRoot, exercises);
+    }
+
+    @Override
+    public void getExercises(Category category){
+        mPresenter.getExercises(category);
+    }
+
+    @Override
+    public void setCategory(Category category) {
+        mCategory = category;
     }
 }

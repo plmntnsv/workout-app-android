@@ -1,6 +1,6 @@
 package com.example.plmntnsv.workoutapplication.Registration;
 
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
 
 /**
  * Created by Plmn Tnsv on 08-Oct-17.

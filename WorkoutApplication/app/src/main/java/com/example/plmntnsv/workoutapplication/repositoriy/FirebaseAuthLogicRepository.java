@@ -1,9 +1,9 @@
-package com.example.plmntnsv.workoutapplication.repositoriy;
+package com.example.plmntnsv.workoutapplication.Repositoriy;
 
 import android.support.annotation.NonNull;
 
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.repositoriy.base.BaseRepositoryContracts;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.Repositoriy.base.BaseRepositoryContracts;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

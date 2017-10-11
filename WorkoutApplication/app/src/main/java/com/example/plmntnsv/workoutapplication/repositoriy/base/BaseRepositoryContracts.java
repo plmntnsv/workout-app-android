@@ -1,11 +1,8 @@
-package com.example.plmntnsv.workoutapplication.repositoriy.base;
+package com.example.plmntnsv.workoutapplication.Repositoriy.base;
 
-import com.example.plmntnsv.workoutapplication.Login.LoginContracts;
-import com.example.plmntnsv.workoutapplication.Login.LoginFragment;
-import com.example.plmntnsv.workoutapplication.Registration.RegistrationFragment;
-import com.example.plmntnsv.workoutapplication.base.BaseContracts;
-import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
-import com.example.plmntnsv.workoutapplication.models.Workout.Workout;
+import com.example.plmntnsv.workoutapplication.Base.BaseContracts;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Exercise;
+import com.example.plmntnsv.workoutapplication.Models.Workout.Workout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,18 +26,19 @@ public abstract class BaseRepositoryContracts {
     }
 
     public interface FirebaseDataTools {
-        ArrayList<ArrayList<Exercise>> getAllExercises(BaseContracts.OnSuccessfulDataTrasfer listener);
-        ArrayList<Exercise> getAllChestExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener);
-        ArrayList<Exercise> getAllArmsExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener);
-        ArrayList<Exercise> getAllBackExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener);
-        ArrayList<Exercise> getAllShouldersExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener);
-        ArrayList<Exercise> getAllCardioExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener);
-        ArrayList<Exercise> getAllCoreExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener);
-        ArrayList<Exercise> getAllLegsExercisesFromDb(BaseContracts.OnSuccessfulDataTrasfer listener);
+        ArrayList<ArrayList<Exercise>> getAllExercises(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
+        ArrayList<Exercise> getAllChestExercisesFromDb(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
+        ArrayList<Exercise> getAllArmsExercisesFromDb(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
+        ArrayList<Exercise> getAllBackExercisesFromDb(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
+        ArrayList<Exercise> getAllShouldersExercisesFromDb(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
+        ArrayList<Exercise> getAllCardioExercisesFromDb(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
+        ArrayList<Exercise> getAllCoreExercisesFromDb(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
+        ArrayList<Exercise> getAllLegsExercisesFromDb(BaseContracts.OnSuccessfulExerciseDataTrasfer listener);
 
         void postUserToDb(String uid, String email);
         void postWorkoutToDb(String uid, Workout workout);
         void postExerciseToWorkout();
-        ArrayList<Workout> getAllUserWorkouts(String uid, BaseContracts.OnSuccessfulDataTrasfer listener);
+
+        ArrayList<Workout> getAllUserWorkouts(String uid, BaseContracts.OnSuccessfulWorkoutDataTrasfer listener);
     }
 }

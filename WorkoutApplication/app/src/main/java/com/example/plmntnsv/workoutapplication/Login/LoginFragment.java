@@ -13,10 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.plmntnsv.workoutapplication.Home.HomeActivity;
+import com.example.plmntnsv.workoutapplication.Models.PopulateDB.Temp;
 import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.Registration.RegistrationActivity;
-import com.example.plmntnsv.workoutapplication.repositoriy.FirebaseDataLogicRepository;
-import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
+import com.example.plmntnsv.workoutapplication.Repositoriy.FirebaseDataLogicRepository;
+import com.example.plmntnsv.workoutapplication.Utils.ModalWindow;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,8 +53,8 @@ public class LoginFragment extends Fragment implements LoginContracts.View {
         mTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Temp temp = new Temp();
-                //repo.populateDbWorkouts(temp.getAll());
+                Temp temp = new Temp();
+                repo.populateDbWorkouts(temp.getAll());
                 //repo.getAllChestExercisesFromDb();
             }
         });

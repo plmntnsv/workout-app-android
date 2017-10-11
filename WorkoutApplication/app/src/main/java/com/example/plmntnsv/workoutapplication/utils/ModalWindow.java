@@ -1,9 +1,9 @@
-package com.example.plmntnsv.workoutapplication.utils;
+package com.example.plmntnsv.workoutapplication.Utils;
 
 import android.view.View;
 
 import com.example.plmntnsv.workoutapplication.R;
-import com.example.plmntnsv.workoutapplication.utils.contracts.ModalWindowLogic;
+import com.example.plmntnsv.workoutapplication.Utils.contracts.ModalWindowLogic;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 

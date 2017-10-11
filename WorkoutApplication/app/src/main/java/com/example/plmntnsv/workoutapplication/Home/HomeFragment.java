@@ -7,9 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.plmntnsv.workoutapplication.Login.LoginActivity;
 import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.Tabs.Fragments.TabsFragmentType;
 import com.example.plmntnsv.workoutapplication.Tabs.TabsActivity;

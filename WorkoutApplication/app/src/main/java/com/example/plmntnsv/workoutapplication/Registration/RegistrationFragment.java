@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import com.example.plmntnsv.workoutapplication.Home.HomeActivity;
 import com.example.plmntnsv.workoutapplication.R;
-import com.example.plmntnsv.workoutapplication.utils.ModalWindow;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.plmntnsv.workoutapplication.Utils.ModalWindow;
 
 /**
  * A simple {@link Fragment} subclass.

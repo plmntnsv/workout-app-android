@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.plmntnsv.workoutapplication.R;
 import com.example.plmntnsv.workoutapplication.Tabs.Fragments.TabsFragmentType;
 import com.example.plmntnsv.workoutapplication.Tabs.Fragments.TabsPinnedWorkoutFragment;
 import com.example.plmntnsv.workoutapplication.Tabs.Fragments.TabsSavedWorkoutsFragment;

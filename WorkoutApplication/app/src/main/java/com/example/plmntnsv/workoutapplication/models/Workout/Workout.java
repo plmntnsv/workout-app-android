@@ -1,6 +1,6 @@
-package com.example.plmntnsv.workoutapplication.models.Workout;
+package com.example.plmntnsv.workoutapplication.Models.Workout;
 
-import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Exercise;
 
 import java.util.ArrayList;
 import java.util.List;

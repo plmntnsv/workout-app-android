@@ -1,4 +1,4 @@
-package com.example.plmntnsv.workoutapplication.utils.contracts;
+package com.example.plmntnsv.workoutapplication.Utils.contracts;
 
 import android.view.View;
 

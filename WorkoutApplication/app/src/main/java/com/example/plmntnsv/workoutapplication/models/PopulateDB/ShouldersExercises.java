@@ -1,11 +1,9 @@
-package com.example.plmntnsv.workoutapplication.models.PopulateDB;
+package com.example.plmntnsv.workoutapplication.Models.PopulateDB;
 
-import com.example.plmntnsv.workoutapplication.models.Exercise.Category;
-import com.example.plmntnsv.workoutapplication.models.Exercise.Exercise;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Category;
+import com.example.plmntnsv.workoutapplication.Models.Exercise.Exercise;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Plmn Tnsv on 10-Oct-17.
@@ -81,7 +79,7 @@ public class ShouldersExercises {
 
     private Exercise barbellShoulderPress(){
         String name = "Barbell Shoulder Press";
-        String description = "";
+        String description = "Preparation: Grasp barbell with slightly wider than shoulder width overhand grip from rack. Position bar near upper chest. Execution: Press bar upward until arms are extended overhead. Return to upper chest and repeat.";
         return template(name, description);
     }
 

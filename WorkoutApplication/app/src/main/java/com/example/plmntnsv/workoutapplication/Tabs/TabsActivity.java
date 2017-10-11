@@ -38,11 +38,6 @@ public class TabsActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
     public Fragment setTabsView(TabsFragmentType type) {
         Fragment fragment;
         switch (type) {
